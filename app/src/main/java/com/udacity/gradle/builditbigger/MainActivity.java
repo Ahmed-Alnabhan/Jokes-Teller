@@ -1,23 +1,26 @@
 package com.udacity.gradle.builditbigger;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
+import com.elearnna.www.androidjokeslib.JokeActivity;
 import com.example.JokesStore;
 
 
 public class MainActivity extends AppCompatActivity {
     private JokesStore jokesStore;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         jokesStore = new JokesStore();
+        intent = new Intent(getApplicationContext(), JokeActivity.class);
     }
 
 
@@ -45,7 +48,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void tellJoke(View view) {
         String joke = jokesStore.tellMeAJoke();
-        Toast.makeText(this, joke, Toast.LENGTH_SHORT).show();
+        intent.putExtra("joke", joke);
+        startActivity(intent);
     }
 
 

@@ -2,7 +2,7 @@ package com.example;
 
 import java.util.HashMap;
 import java.util.Random;
-
+// Jokes are taken from http://www.rd.com/jokes/animal/
 public class JokesStore {
     private HashMap<Integer, String> jokes;
 
