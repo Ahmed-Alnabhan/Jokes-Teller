@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/dimen_16_dp"
         android:fontFamily="casual"
+        android:textSize="@dimen/size_22_sp"
         android:background="@color/gray"
         android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"

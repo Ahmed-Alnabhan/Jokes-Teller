@@ -8,11 +8,9 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.elearnna.www.androidjokeslib.JokeActivity;
-import com.example.JokesStore;
 
 
 public class MainActivity extends AppCompatActivity implements OnReadingJokeComplete {
-    private JokesStore jokesStore;
     private Intent intent;
     private String currentJoke;
 
@@ -20,7 +18,6 @@ public class MainActivity extends AppCompatActivity implements OnReadingJokeComp
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        jokesStore = new JokesStore();
     }
 
 
