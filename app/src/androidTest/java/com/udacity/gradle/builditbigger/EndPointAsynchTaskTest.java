@@ -31,8 +31,7 @@ public class EndPointAsynchTaskTest implements OnReadingJokeComplete {
     @Test
     public void testAsyncTask() {
         try {
-            MainActivity mainActivity = new MainActivity();
-            EndpointsAsynchTask endpointsAsynchTask = new EndpointsAsynchTask(mainActivity.getApplicationContext(), this);
+            EndpointsAsynchTask endpointsAsynchTask = new EndpointsAsynchTask(activityTestRule.getActivity().getApplicationContext(), this);
             endpointsAsynchTask.execute();
             assertTrue(!result.isEmpty());
             assertNotNull(result);
