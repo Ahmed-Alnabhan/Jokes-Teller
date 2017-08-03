@@ -11,16 +11,16 @@ import com.elearnna.www.androidjokeslib.JokeActivity;
 import com.example.JokesStore;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnReadingJokeComplete {
     private JokesStore jokesStore;
     private Intent intent;
+    private String currentJoke;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         jokesStore = new JokesStore();
-        intent = new Intent(getApplicationContext(), JokeActivity.class);
     }
 
 
@@ -47,10 +47,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tellJoke(View view) {
-        String joke = jokesStore.tellMeAJoke();
-        intent.putExtra("joke", joke);
-        startActivity(intent);
+        EndpointsAsynchTask asynchTask = new EndpointsAsynchTask(getApplicationContext(), this);
+        asynchTask.execute();
     }
 
 
+    @Override
+    public void readJokeComplete(String joke) {
+        currentJoke = joke;
+        publishJoke();
+    }
+
+    private void publishJoke() {
+        intent = new Intent(getApplicationContext(), JokeActivity.class);
+        intent.putExtra("joke", currentJoke);
+        startActivity(intent);
+    }
 }
