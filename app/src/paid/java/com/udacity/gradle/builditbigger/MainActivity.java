@@ -1,11 +1,11 @@
 package com.udacity.gradle.builditbigger;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import com.elearnna.www.androidjokeslib.JokeActivity;
 
@@ -13,11 +13,13 @@ import com.elearnna.www.androidjokeslib.JokeActivity;
 public class MainActivity extends AppCompatActivity implements OnReadingJokeComplete {
     private Intent intent;
     private String currentJoke;
+    private ProgressBar donutProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        donutProgress = (ProgressBar) findViewById(R.id.donut_progress);
     }
 
 
@@ -44,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements OnReadingJokeComp
     }
 
     public void tellJoke(View view) {
+        donutProgress.setVisibility(View.VISIBLE);
         EndpointsAsynchTask asynchTask = new EndpointsAsynchTask(getApplicationContext(), this);
         asynchTask.execute();
     }
@@ -53,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements OnReadingJokeComp
     public void readJokeComplete(String joke) {
         currentJoke = joke;
         publishJoke();
+        donutProgress.setVisibility(View.GONE);
     }
 
     private void publishJoke() {

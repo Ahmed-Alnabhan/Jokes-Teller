@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.AdRequest;
@@ -18,11 +19,13 @@ public class MainActivity extends AppCompatActivity implements OnReadingJokeComp
     private Intent intent;
     private String currentJoke;
     private InterstitialAd interstitialAd;
+    private ProgressBar donutProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        donutProgress = (ProgressBar) findViewById(R.id.donut_progress);
         interstitialAd = new InterstitialAd(this);
         interstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
         createNewInterstitialAd();
@@ -77,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements OnReadingJokeComp
     }
 
     private void loadJokes() {
+        donutProgress.setVisibility(View.VISIBLE);
         EndpointsAsynchTask asynchTask = new EndpointsAsynchTask(getApplicationContext(), this);
         asynchTask.execute();
     }
@@ -84,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements OnReadingJokeComp
     @Override
     public void readJokeComplete(String joke) {
         currentJoke = joke;
-        //publishJoke();
+        donutProgress.setVisibility(View.GONE);
     }
 
     private void publishJoke() {
