@@ -33,7 +33,10 @@ public class EndPointAsynchTaskTest implements OnReadingJokeComplete {
         try {
             EndpointsAsynchTask endpointsAsynchTask = new EndpointsAsynchTask(activityTestRule.getActivity().getApplicationContext(), this);
             endpointsAsynchTask.execute();
+            Thread.sleep(3000);
             assertTrue(!result.isEmpty());
+            // test the result when the server is down
+            assertTrue(!result.equals("Connection refused"));
             assertNotNull(result);
         } catch (Exception e) {
             e.printStackTrace();
