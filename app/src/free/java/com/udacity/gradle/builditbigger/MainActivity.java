@@ -90,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements OnReadingJokeComp
     public void readJokeComplete(String joke) {
         currentJoke = joke;
         donutProgress.setVisibility(View.GONE);
+        publishJoke();
     }
 
     private void publishJoke() {
