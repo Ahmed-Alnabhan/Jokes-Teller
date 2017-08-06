@@ -35,8 +35,9 @@ public class MainActivity extends AppCompatActivity implements OnReadingJokeComp
             @Override
             public void onAdClosed() {
                 createNewInterstitialAd();
-                loadJokes();
-                publishJoke();
+                if (currentJoke != null) {
+                    publishJoke();
+                }
             }
         });
     }
